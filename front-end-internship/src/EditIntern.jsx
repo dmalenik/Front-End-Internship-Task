@@ -8,9 +8,6 @@ const EditIntern = () => {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  console.log(email);
-  // const [isVerifiedEmail, setIsVerifiedEmail] = useState(false);
-  // console.log(isVerifiedEmail);
   const [internshipStart, setInternshipStart] = useState("");
   const [internshipEnd, setInternshipEnd] = useState("");
 
@@ -28,6 +25,10 @@ const EditIntern = () => {
   };
 
   const verifyEmail = () => {
+    if (!email) {
+      return;
+    }
+
     if (isEmail(email)) {
       console.log("Correct");
     } else {
@@ -36,6 +37,20 @@ const EditIntern = () => {
   };
 
   verifyEmail();
+
+  const compareDates = () => {
+    if (!internshipStart || !internshipEnd) {
+      return;
+    }
+
+    if (internshipEnd > internshipStart) {
+      console.log(true);
+    } else {
+      console.log(false);
+    }
+  };
+
+  compareDates();
 
   const getIntern = async () => {
     let url = `http://localhost:3001/interns/${id}`;
@@ -55,10 +70,28 @@ const EditIntern = () => {
     getIntern();
   }, [id]);
 
+  const updatePost = async () => {
+    let url = `http://localhost:3001/interns/${id}`;
+    let body = {
+      id: id,
+      name: name,
+      email: email,
+      internshipStart: internshipStart,
+      internshipEnd: internshipEnd,
+    };
+    let requestOptions = {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    };
+    let response = await fetch(url, requestOptions);
+    let data = await response.json();
+  };
+
   return (
     <div>
       <NavLink to="/">Back to list </NavLink>
-      <form>
+      <form onSubmit={updatePost}>
         <label>Name</label>
         <input
           type="text"
