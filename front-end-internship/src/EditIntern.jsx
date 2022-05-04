@@ -90,36 +90,40 @@ const EditIntern = () => {
     <div>
       <NavLink to="/">Back to list </NavLink>
       <form onSubmit={updatePost}>
-        <label>Name</label>
+        <label for="name">Name</label>
         <input
           type="text"
           name="name"
+          id="name"
           value={name}
           onChange={(e) => handleName(e)}
           required
         />
-        <label>Email</label>
+        <label for="email">Email</label>
         <input
           type="text"
           name="email"
+          id="email"
           value={email}
           onChange={(e) => {
             handleEmail(e);
           }}
           required
         />
-        <label>Internship Start</label>
+        <label for="start">Internship Start</label>
         <input
           type="date"
           name="internshipStart"
+          id="start"
           value={internshipStart}
           onChange={(e) => handleInternshipStart(e)}
           required
         />
-        <label>Internship End</label>
+        <label for="end">Internship End</label>
         <input
           type="date"
           name="internshipEnd"
+          id="end"
           value={internshipEnd}
           onChange={(e) => handleInternshipEnd(e)}
           required
