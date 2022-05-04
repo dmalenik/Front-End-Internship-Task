@@ -1,7 +1,9 @@
+import "./EditIntern.css";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { NavLink } from "react-router-dom";
 import isEmail from "validator/lib/isEmail";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 
 const EditIntern = () => {
   const { id } = useParams();
@@ -87,49 +89,67 @@ const EditIntern = () => {
   };
 
   return (
-    <div>
-      <NavLink to="/">Back to list </NavLink>
-      <form onSubmit={updatePost}>
-        <label for="name">Name</label>
-        <input
-          type="text"
-          name="name"
-          id="name"
-          value={name}
-          onChange={(e) => handleName(e)}
-          required
-        />
-        <label for="email">Email</label>
-        <input
-          type="text"
-          name="email"
-          id="email"
-          value={email}
-          onChange={(e) => {
-            handleEmail(e);
-          }}
-          required
-        />
-        <label for="start">Internship Start</label>
-        <input
-          type="date"
-          name="internshipStart"
-          id="start"
-          value={internshipStart}
-          onChange={(e) => handleInternshipStart(e)}
-          required
-        />
-        <label for="end">Internship End</label>
-        <input
-          type="date"
-          name="internshipEnd"
-          id="end"
-          value={internshipEnd}
-          onChange={(e) => handleInternshipEnd(e)}
-          required
-        />
-        <input type="submit" value="Submit" />
-      </form>
+    <div className="container">
+      <div className="returnLink">
+        <AiOutlineArrowLeft />
+        <NavLink to="/">Back to list </NavLink>
+      </div>
+      <section className="internProfile">
+        <h2 className="headerForm">Edit</h2>
+        <form onSubmit={updatePost} className="internForm">
+          <div className="name">
+            <label for="name">Full name *</label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              value={name}
+              onChange={(e) => handleName(e)}
+              required
+            />
+          </div>
+          <div className="email">
+            <label for="email">Email address *</label>
+            <input
+              type="text"
+              name="email"
+              id="email"
+              value={email}
+              onChange={(e) => {
+                handleEmail(e);
+              }}
+              required
+            />
+          </div>
+          <div className="internshipDates">
+            <div className="date">
+              <label for="start">Internship start *</label>
+              <input
+                type="date"
+                name="internshipStart"
+                id="start"
+                value={internshipStart}
+                onChange={(e) => handleInternshipStart(e)}
+                required
+              />
+            </div>
+            <div className="date">
+              <label for="end">Internship end *</label>
+              <input
+                type="date"
+                name="internshipEnd"
+                id="end"
+                value={internshipEnd}
+                onChange={(e) => handleInternshipEnd(e)}
+                required
+              />
+            </div>
+          </div>
+          <div className="btn">
+            <input type="submit" value="Submit" />
+          </div>
+        </form>
+      </section>
     </div>
   );
 };
