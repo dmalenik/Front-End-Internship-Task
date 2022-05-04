@@ -8,8 +8,10 @@ const EditIntern = () => {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [isEmailCorrect, setIsEmailCorrect] = useState("");
   const [internshipStart, setInternshipStart] = useState("");
   const [internshipEnd, setInternshipEnd] = useState("");
+  const [isDateCorrect, setIsDateCorrect] = useState("");
 
   const handleName = (e) => {
     setName(e.target.value);
@@ -25,32 +27,28 @@ const EditIntern = () => {
   };
 
   const verifyEmail = () => {
-    if (!email) {
-      return;
-    }
-
     if (isEmail(email)) {
-      console.log("Correct");
+      setIsEmailCorrect(true);
     } else {
-      console.log("Wrong!");
+      setIsEmailCorrect(false);
     }
   };
 
-  verifyEmail();
+  useEffect(() => {
+    verifyEmail();
+  }, [email]);
 
   const compareDates = () => {
-    if (!internshipStart || !internshipEnd) {
-      return;
-    }
-
     if (internshipEnd > internshipStart) {
-      console.log(true);
+      setIsDateCorrect(true);
     } else {
-      console.log(false);
+      setIsDateCorrect(false);
     }
   };
 
-  compareDates();
+  useEffect(() => {
+    compareDates();
+  }, [internshipStart, internshipEnd]);
 
   const getIntern = async () => {
     let url = `http://localhost:3001/interns/${id}`;
